@@ -8181,7 +8181,6 @@ var $author$project$Zipper$extendUnaryWithSubst = F2(
 			},
 			z);
 	});
-var $elm$core$Debug$log = _Debug_log;
 var $author$project$Tableau$defRef = {str: '', up: $elm$core$Maybe$Nothing};
 var $author$project$Zipper$makeClosed = function (z) {
 	return A2(
@@ -8805,199 +8804,194 @@ var $author$project$Zipper$renumber = function (tableau) {
 var $author$project$Editor$topRenumbered = A2($elm$core$Basics$composeR, $author$project$Editor$top, $author$project$Zipper$renumber);
 var $author$project$Editor$simpleUpdate = F2(
 	function (msg, model) {
-		return A2(
-			$elm$core$Debug$log,
-			'model',
-			function () {
-				switch (msg.$) {
-					case 'ChangeText':
-						var z = msg.a;
-						var _new = msg.b;
-						return _Utils_update(
-							model,
-							{
-								tableau: $author$project$Editor$top(
-									A2($author$project$Zipper$setFormula, _new, z))
-							});
-					case 'ExpandUnary':
-						var extType = msg.a;
-						var z = msg.b;
-						return _Utils_update(
-							model,
-							{
-								tableau: $author$project$Editor$topRenumbered(
-									A2(
-										$author$project$Zipper$renumberJustInReferences,
-										$author$project$Zipper$renumberJustInRefWhenExpanding,
-										A2($author$project$Zipper$extendUnary, extType, z)))
-							});
-					case 'ExpandUnaryWithSubst':
-						var extType = msg.a;
-						var z = msg.b;
-						return _Utils_update(
-							model,
-							{
-								tableau: $author$project$Editor$topRenumbered(
-									A2(
-										$author$project$Zipper$renumberJustInReferences,
-										$author$project$Zipper$renumberJustInRefWhenExpanding,
-										A2($author$project$Zipper$extendUnaryWithSubst, extType, z)))
-							});
-					case 'ExpandBinary':
-						var extType = msg.a;
-						var z = msg.b;
-						return _Utils_update(
-							model,
-							{
-								tableau: $author$project$Editor$topRenumbered(
-									A2(
-										$author$project$Zipper$renumberJustInReferences,
-										$author$project$Zipper$renumberJustInRefWhenExpanding,
-										A2($author$project$Zipper$extendBinary, extType, z)))
-							});
-					case 'ChangeRef':
-						var z = msg.a;
-						var _new = msg.b;
-						return _Utils_update(
-							model,
-							{
-								tableau: $author$project$Editor$top(
-									A2($author$project$Zipper$setRefs, _new, z))
-							});
-					case 'Delete':
-						var z = msg.a;
-						return _Utils_update(
-							model,
-							{
-								tableau: $author$project$Editor$topRenumbered(
-									$author$project$Zipper$delete(z))
-							});
-					case 'DeleteMe':
-						var z = msg.a;
-						var newZipp = $author$project$Zipper$deleteMe(z);
-						return (!_Utils_eq(
-							newZipp,
-							$author$project$Zipper$up(z))) ? _Utils_update(
-							model,
-							{
-								tableau: $author$project$Editor$topRenumbered(
-									A2(
-										$author$project$Zipper$renumberJustInReferences,
-										$author$project$Zipper$renumberJustInRefWhenDeleting,
-										$author$project$Zipper$deleteMe(z)))
-							}) : _Utils_update(
-							model,
-							{
-								tableau: $author$project$Editor$topRenumbered(
-									$author$project$Zipper$deleteMe(z))
-							});
-					case 'MakeClosed':
-						var z = msg.a;
-						return _Utils_update(
-							model,
-							{
-								tableau: $author$project$Editor$top(
-									$author$project$Zipper$makeClosed(z))
-							});
-					case 'SetClosed':
-						var which = msg.a;
-						var z = msg.b;
-						var ref = msg.c;
-						return _Utils_update(
-							model,
-							{
-								tableau: $author$project$Editor$top(
-									A3($author$project$Zipper$setClosed, which, ref, z))
-							});
-					case 'MakeOpen':
-						var z = msg.a;
-						return _Utils_update(
-							model,
-							{
-								tableau: $author$project$Editor$top(
-									$author$project$Zipper$makeOpen(z))
-							});
-					case 'ChangeSubst':
-						var z = msg.a;
-						var newSubst = msg.b;
-						return _Utils_update(
-							model,
-							{
-								tableau: $author$project$Editor$top(
-									A2($author$project$Zipper$setSubstitution, newSubst, z))
-							});
-					case 'SwitchBetas':
-						var z = msg.a;
-						return _Utils_update(
-							model,
-							{
-								tableau: $author$project$Editor$topRenumbered(
-									$author$project$Zipper$switchBetas(z))
-							});
-					case 'ChangeToUnary':
-						var extType = msg.a;
-						var z = msg.b;
-						return _Utils_update(
-							model,
-							{
-								tableau: $author$project$Editor$topRenumbered(
-									A2($author$project$Zipper$changeToUnaryRule, extType, z))
-							});
-					case 'ChangeToUnaryWithSubst':
-						var extType = msg.a;
-						var z = msg.b;
-						return _Utils_update(
-							model,
-							{
-								tableau: $author$project$Editor$topRenumbered(
-									A2($author$project$Zipper$changeToUnaryRuleWithSubst, extType, z))
-							});
-					case 'ChangeToBinary':
-						var extType = msg.a;
-						var z = msg.b;
-						return _Utils_update(
-							model,
-							{
-								tableau: $author$project$Editor$topRenumbered(
-									A2($author$project$Zipper$changeToBinaryRule, extType, z))
-							});
-					case 'ChangeButtonsAppearance':
-						var z = msg.a;
-						return _Utils_update(
-							model,
-							{
-								tableau: $author$project$Editor$top(
-									$author$project$Zipper$changeButtonAppearance(z))
-							});
-					case 'SetConfig':
-						var _new = msg.a;
-						return _Utils_update(
-							model,
-							{config: _new});
-					case 'Prettify':
-						return _Utils_update(
-							model,
-							{
-								tableau: $author$project$Zipper$prettify(model.tableau)
-							});
-					case 'JsonSelect':
-						return model;
-					case 'JsonSelected':
-						return model;
-					case 'Undo':
-						return model;
-					case 'Redo':
-						return model;
-					case 'JsonRead':
-						return model;
-					case 'Export':
-						return model;
-					case 'Print':
-						return model;
-					default:
-						return model;
-				}
-			}());
+		switch (msg.$) {
+			case 'ChangeText':
+				var z = msg.a;
+				var _new = msg.b;
+				return _Utils_update(
+					model,
+					{
+						tableau: $author$project$Editor$top(
+							A2($author$project$Zipper$setFormula, _new, z))
+					});
+			case 'ExpandUnary':
+				var extType = msg.a;
+				var z = msg.b;
+				return _Utils_update(
+					model,
+					{
+						tableau: $author$project$Editor$topRenumbered(
+							A2(
+								$author$project$Zipper$renumberJustInReferences,
+								$author$project$Zipper$renumberJustInRefWhenExpanding,
+								A2($author$project$Zipper$extendUnary, extType, z)))
+					});
+			case 'ExpandUnaryWithSubst':
+				var extType = msg.a;
+				var z = msg.b;
+				return _Utils_update(
+					model,
+					{
+						tableau: $author$project$Editor$topRenumbered(
+							A2(
+								$author$project$Zipper$renumberJustInReferences,
+								$author$project$Zipper$renumberJustInRefWhenExpanding,
+								A2($author$project$Zipper$extendUnaryWithSubst, extType, z)))
+					});
+			case 'ExpandBinary':
+				var extType = msg.a;
+				var z = msg.b;
+				return _Utils_update(
+					model,
+					{
+						tableau: $author$project$Editor$topRenumbered(
+							A2(
+								$author$project$Zipper$renumberJustInReferences,
+								$author$project$Zipper$renumberJustInRefWhenExpanding,
+								A2($author$project$Zipper$extendBinary, extType, z)))
+					});
+			case 'ChangeRef':
+				var z = msg.a;
+				var _new = msg.b;
+				return _Utils_update(
+					model,
+					{
+						tableau: $author$project$Editor$top(
+							A2($author$project$Zipper$setRefs, _new, z))
+					});
+			case 'Delete':
+				var z = msg.a;
+				return _Utils_update(
+					model,
+					{
+						tableau: $author$project$Editor$topRenumbered(
+							$author$project$Zipper$delete(z))
+					});
+			case 'DeleteMe':
+				var z = msg.a;
+				var newZipp = $author$project$Zipper$deleteMe(z);
+				return (!_Utils_eq(
+					newZipp,
+					$author$project$Zipper$up(z))) ? _Utils_update(
+					model,
+					{
+						tableau: $author$project$Editor$topRenumbered(
+							A2(
+								$author$project$Zipper$renumberJustInReferences,
+								$author$project$Zipper$renumberJustInRefWhenDeleting,
+								$author$project$Zipper$deleteMe(z)))
+					}) : _Utils_update(
+					model,
+					{
+						tableau: $author$project$Editor$topRenumbered(
+							$author$project$Zipper$deleteMe(z))
+					});
+			case 'MakeClosed':
+				var z = msg.a;
+				return _Utils_update(
+					model,
+					{
+						tableau: $author$project$Editor$top(
+							$author$project$Zipper$makeClosed(z))
+					});
+			case 'SetClosed':
+				var which = msg.a;
+				var z = msg.b;
+				var ref = msg.c;
+				return _Utils_update(
+					model,
+					{
+						tableau: $author$project$Editor$top(
+							A3($author$project$Zipper$setClosed, which, ref, z))
+					});
+			case 'MakeOpen':
+				var z = msg.a;
+				return _Utils_update(
+					model,
+					{
+						tableau: $author$project$Editor$top(
+							$author$project$Zipper$makeOpen(z))
+					});
+			case 'ChangeSubst':
+				var z = msg.a;
+				var newSubst = msg.b;
+				return _Utils_update(
+					model,
+					{
+						tableau: $author$project$Editor$top(
+							A2($author$project$Zipper$setSubstitution, newSubst, z))
+					});
+			case 'SwitchBetas':
+				var z = msg.a;
+				return _Utils_update(
+					model,
+					{
+						tableau: $author$project$Editor$topRenumbered(
+							$author$project$Zipper$switchBetas(z))
+					});
+			case 'ChangeToUnary':
+				var extType = msg.a;
+				var z = msg.b;
+				return _Utils_update(
+					model,
+					{
+						tableau: $author$project$Editor$topRenumbered(
+							A2($author$project$Zipper$changeToUnaryRule, extType, z))
+					});
+			case 'ChangeToUnaryWithSubst':
+				var extType = msg.a;
+				var z = msg.b;
+				return _Utils_update(
+					model,
+					{
+						tableau: $author$project$Editor$topRenumbered(
+							A2($author$project$Zipper$changeToUnaryRuleWithSubst, extType, z))
+					});
+			case 'ChangeToBinary':
+				var extType = msg.a;
+				var z = msg.b;
+				return _Utils_update(
+					model,
+					{
+						tableau: $author$project$Editor$topRenumbered(
+							A2($author$project$Zipper$changeToBinaryRule, extType, z))
+					});
+			case 'ChangeButtonsAppearance':
+				var z = msg.a;
+				return _Utils_update(
+					model,
+					{
+						tableau: $author$project$Editor$top(
+							$author$project$Zipper$changeButtonAppearance(z))
+					});
+			case 'SetConfig':
+				var _new = msg.a;
+				return _Utils_update(
+					model,
+					{config: _new});
+			case 'Prettify':
+				return _Utils_update(
+					model,
+					{
+						tableau: $author$project$Zipper$prettify(model.tableau)
+					});
+			case 'JsonSelect':
+				return model;
+			case 'JsonSelected':
+				return model;
+			case 'Undo':
+				return model;
+			case 'Redo':
+				return model;
+			case 'JsonRead':
+				return model;
+			case 'Export':
+				return model;
+			case 'Print':
+				return model;
+			default:
+				return model;
+		}
 	});
 var $elm$file$File$Download$string = F3(
 	function (name, mime, content) {
@@ -16469,9 +16463,9 @@ var $author$project$Editor$view = function (model) {
 		title: 'Tableau Editor'
 	};
 };
-var $author$project$Editor$main = $elm$browser$Browser$document(
+var $author$project$Main$main = $elm$browser$Browser$document(
 	{init: $author$project$Editor$init, subscriptions: $author$project$Editor$subscriptions, update: $author$project$Editor$update, view: $author$project$Editor$view});
-_Platform_export({'Editor':{'init':$author$project$Editor$main(
+_Platform_export({'Main':{'init':$author$project$Main$main(
 	$elm$json$Json$Decode$oneOf(
 		_List_fromArray(
 			[
